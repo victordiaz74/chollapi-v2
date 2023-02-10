@@ -9,7 +9,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class ProductoDto implements Serializable {
 
-
     @Expose
     public Long idProducto;
     @Expose

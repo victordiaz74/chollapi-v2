@@ -17,8 +17,6 @@ public interface OfertaService {
 
     Boolean eliminarOferta(Long id);
 
-    List<Oferta> mejores10(Long id);
-
     List<Oferta> ultimas5(Long idProducto);
 
     List<OfertaDto> ultimasOfertas(Pageable pageable);

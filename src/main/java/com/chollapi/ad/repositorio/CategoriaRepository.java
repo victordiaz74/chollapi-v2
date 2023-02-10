@@ -10,4 +10,6 @@ import java.util.List;
 
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
 
+    @Query(value = "SELECT p FROM Producto p JOIN p.categoria c WHERE c.idCategoria = :idCategoria")
+    List<Producto> ultimos5(@Param("idCategoria") Long idCategoria);
 }

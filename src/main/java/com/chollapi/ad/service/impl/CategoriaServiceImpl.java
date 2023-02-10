@@ -53,4 +53,10 @@ public class CategoriaServiceImpl implements CategoriaService {
         categoriaRepository.delete(categoria);
         return !categoriaRepository.existsById(id);
     }
+
+    @Override
+    public List<Producto> ultimos5(Long idCategoria) {
+        return categoriaRepository.ultimos5(idCategoria);
+    }
+
 }

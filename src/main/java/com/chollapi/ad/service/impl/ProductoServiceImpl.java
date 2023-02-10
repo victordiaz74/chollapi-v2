@@ -2,6 +2,7 @@ package com.chollapi.ad.service.impl;
 
 import com.chollapi.ad.dto.ProductoDto;
 import com.chollapi.ad.modelo.Categoria;
+import com.chollapi.ad.modelo.Oferta;
 import com.chollapi.ad.repositorio.CategoriaRepository;
 import com.chollapi.ad.repositorio.ProductoRepository;
 import jakarta.transaction.Transactional;
@@ -52,13 +53,14 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     @Override
-    public List<Producto> buscarProducto(String nombre, String caracteristicas) {
-        return productoRepository.buscarProducto(nombre, caracteristicas);
+    public List<Producto> buscarProducto(String texto) {
+        return productoRepository.buscarProducto(texto);
     }
 
     @Override
-    public List<Producto> ultimos5(Long idCategoria) {
-        return productoRepository.ultimos5(idCategoria);
+    public List<Oferta> mejores10(Long idProducto){
+
+        return productoRepository.mejores10(idProducto);
     }
 
     @Override

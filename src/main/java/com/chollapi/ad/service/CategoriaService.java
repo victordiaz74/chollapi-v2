@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface CategoriaService {
 
-
     Categoria obtenerCategoriaID(Long id);
 
     Categoria crearCategoria(Categoria categoria);
@@ -15,5 +14,7 @@ public interface CategoriaService {
     Categoria modificarCategoria(Categoria categoria);
 
     Boolean eliminarCategoria(Long id);
+
+    List<Producto> ultimos5(Long idCategoria);
 
 }

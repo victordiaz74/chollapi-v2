@@ -1,5 +1,6 @@
 package com.chollapi.ad.repositorio;
 
+import com.chollapi.ad.modelo.Oferta;
 import com.chollapi.ad.modelo.Producto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -9,9 +10,9 @@ import java.util.List;
 
 public interface ProductoRepository extends JpaRepository<Producto, Long> {
 
-    @Query(value = "SELECT p FROM Producto p WHERE p.nombre LIKE %:nombre% AND p.caracteristicas LIKE %:caracteristicas% ", nativeQuery = true)
-    List<Producto> buscarProducto(@Param("nombre") String nombre,@Param("caracteristicas") String caracteristicas);
+    @Query(value = "SELECT p FROM Producto p WHERE p.nombre LIKE %:texto% AND p.caracteristicas LIKE %:texto% ")
+    List<Producto> buscarProducto(@Param("texto") String texto);
 
-    @Query(value = "SELECT p FROM Producto p JOIN p.categoria c WHERE c.idCategoria = :idCategoria")
-    List<Producto> ultimos5(@Param("idCategoria") Long idCategoria);
+    @Query(value = "SELECT o FROM Oferta as o JOIN o.productos as p where p.idProducto = :idProducto ORDER BY o.precio DESC")
+    List<Oferta> mejores10(@Param("idProducto") Long idProducto);
 }

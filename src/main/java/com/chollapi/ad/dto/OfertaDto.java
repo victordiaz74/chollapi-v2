@@ -14,7 +14,6 @@ public class OfertaDto implements Serializable {
     public String url;
     @Expose
     public Date fechaPublicacion;
-
     @Expose
     public Boolean disponible;
 

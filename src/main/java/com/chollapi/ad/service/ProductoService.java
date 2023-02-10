@@ -1,6 +1,7 @@
 package com.chollapi.ad.service;
 
 import com.chollapi.ad.dto.ProductoDto;
+import com.chollapi.ad.modelo.Oferta;
 import com.chollapi.ad.modelo.Producto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,9 +18,9 @@ public interface ProductoService{
 
     Boolean eliminarProducto(Long id);
 
-    List<Producto> buscarProducto(String nombre, String caracteristicas);
+    List<Producto> buscarProducto(String texto);
 
     List<ProductoDto> listar5Pag(Pageable pageable);
 
-    List<Producto> ultimos5(Long idCategoria);
+    List<Oferta> mejores10(Long id);
 }

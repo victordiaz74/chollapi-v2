@@ -22,22 +22,20 @@ public class ProductoController {
 
     @Autowired
     private ProductoService productoService;
-    @Autowired
-    private CategoriaService categoriaService;
 
     public String toJson(Object object) {
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 
         return gson.toJson(object);
     }
-    @RequestMapping(method = RequestMethod.GET, value = {"/obtenerProductoID/{id}"})
-    public ResponseEntity<String> obtenerProductoID(@PathVariable Long id){
-        //productoService.obtenerProductoID(id);
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<String> obtenerProductoID(@RequestParam(value = "idProducto", defaultValue = "0") Long id){
+
         return ResponseEntity.status(HttpStatus.OK)
                 .header("Content-Type", "application/json")
                 .body(toJson(productoService.obtenerProductoID(id)));
     }
-    @RequestMapping(method = RequestMethod.POST, value = {"/crearProducto"})
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<String> crearProducto(@RequestBody Producto producto, Long idCategoria){
         //productoService.crearProducto(producto);
         return ResponseEntity.status(HttpStatus.OK)
@@ -45,7 +43,7 @@ public class ProductoController {
                 .body(toJson(productoService.crearProducto(producto, idCategoria)));
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = {"/modificarProducto"})
+    @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<String> modificarProducto(@RequestBody Producto producto, @RequestParam Long idCategoria){
         //productoService.modificarProducto(producto);
         return ResponseEntity.status(HttpStatus.OK)
@@ -53,26 +51,17 @@ public class ProductoController {
                 .body(toJson(productoService.modificarProducto(producto, idCategoria)));
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = {"/eliminarProducto/{id}"})
-    public ResponseEntity<String> eliminarProducto(@PathVariable Long id){
+    @RequestMapping(method = RequestMethod.DELETE)
+    public ResponseEntity<String> eliminarProducto(@RequestParam(value = "idProducto", defaultValue = "0") Long id){
         //productoService.eliminarProducto(id);
         return ResponseEntity.status(HttpStatus.OK)
                 .header("Content-Type", "application/json")
                 .body(toJson(productoService.eliminarProducto(id)));
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = {"/buscar"})
-    public ResponseEntity<String> buscarProducto(@RequestParam (name = "nombre") String nombre, @RequestParam (name = "caracteristicas") String caracteristicas){
-        //productoService.obtenerProductoID(id);
-        return ResponseEntity.status(HttpStatus.OK)
-                .header("Content-Type", "application/json")
-                .body(toJson(productoService.buscarProducto(nombre, caracteristicas)));
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = {"/list"})
-    public ResponseEntity<String> listar5Pag(@RequestParam (defaultValue = "0") int page,
-                                             @RequestParam (defaultValue = "5") int size){
-        Pageable pageable = PageRequest.of(page, size);
+    @RequestMapping(method = RequestMethod.GET, value = {"/list"}, params = {"page", "count"})
+    public ResponseEntity<String> listar5Pag(@RequestParam(name ="count", defaultValue = "5") int count, @RequestParam(name = "page", defaultValue = "0") int page){
+        Pageable pageable = PageRequest.of(page, count);
 
         List<ProductoDto> productos = productoService.listar5Pag(pageable);
 
@@ -81,12 +70,20 @@ public class ProductoController {
                 .body(toJson(productos));
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = {"/ultimos5productos/{idCategoria}"})
-    public ResponseEntity<String> ultimos5(@PathVariable Long idCategoria){
+    @RequestMapping(method = RequestMethod.GET, value = {"/mejores10oferta"})
+    public ResponseEntity<String> mejores10(@RequestParam(value = "id", defaultValue = "0") Long id){
+        //productoService.obtenerProductoID(id);
         return ResponseEntity.status(HttpStatus.OK)
                 .header("Content-Type", "application/json")
-                .body(toJson(productoService.ultimos5(idCategoria)));
+                .body(toJson(productoService.mejores10(id)));
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = {"/buscar"})
+    public ResponseEntity<String> buscarProducto(@RequestParam (value = "texto", defaultValue = "0") String texto){
+        //productoService.obtenerProductoID(id);
+        return ResponseEntity.status(HttpStatus.OK)
+                .header("Content-Type", "application/json")
+                .body(toJson(productoService.buscarProducto(texto)));
+    }
 
 }

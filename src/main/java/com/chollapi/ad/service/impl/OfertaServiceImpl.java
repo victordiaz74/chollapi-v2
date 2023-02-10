@@ -77,10 +77,6 @@ public class OfertaServiceImpl implements OfertaService {
         return !ofertaRepository.existsById(id);
     }
 
-    @Override
-    public List<Oferta> mejores10(Long idProducto){
-        return ofertaRepository.mejores10(idProducto);
-    }
 
     @Override
     public List<Oferta> ultimas5(Long idProducto) {

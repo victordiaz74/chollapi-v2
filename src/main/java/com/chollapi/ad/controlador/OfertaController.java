@@ -30,14 +30,14 @@ public class OfertaController {
         return gson.toJson(object);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = {"/obtenerOfertaID/{id}"})
-    public ResponseEntity<String> obtenerOfertaID(@PathVariable Long id){
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<String> obtenerOfertaID(@RequestParam(value = "idOferta", defaultValue = "0") Long id){
         //ofertaService.obtenerOfertaID(id);
         return ResponseEntity.status(HttpStatus.OK)
                 .header("Content-Type", "application/json")
                 .body(toJson(ofertaService.obtenerOfertaID(id)));
     }
-    @RequestMapping(method = RequestMethod.POST, value = {"/crearOferta"})
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<String> crearOferta(@RequestBody Oferta oferta, @RequestParam (name = "idProducto") Long idProducto){
         //ofertaService.crearOferta(oferta);
         return ResponseEntity.status(HttpStatus.OK)
@@ -45,7 +45,7 @@ public class OfertaController {
                 .body(toJson(ofertaService.crearOferta(oferta, idProducto)));
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = {"/modificarOferta"})
+    @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<String> modificarOferta(@RequestBody Oferta oferta){
         //ofertaService.modificarOferta(oferta);
         return ResponseEntity.status(HttpStatus.OK)
@@ -53,35 +53,35 @@ public class OfertaController {
                 .body(toJson(ofertaService.modificarOferta(oferta)));
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = {"/eliminarOferta/{id}"})
-    public ResponseEntity<Boolean> eliminarOferta(@PathVariable Long id){
+    @RequestMapping(method = RequestMethod.DELETE)
+    public ResponseEntity<Boolean> eliminarOferta(@RequestParam(value = "idOferta", defaultValue = "0") Long id){
         //ofertaService.eliminarOferta(id);
         return ResponseEntity.status(HttpStatus.OK)
-                .header("Content-Type", "application/boolean")
+                .header("Content-Type", "application/json")
                 .body(ofertaService.eliminarOferta(id));
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = {"/ultimas5/{id}"})
-    public ResponseEntity<String> ultimas5(@PathVariable Long id){
+    @RequestMapping(method = RequestMethod.GET, value = {"/ultimas5ofertas"})
+    public ResponseEntity<String> ultimas5(@RequestParam(value = "idProducto", defaultValue = "0") Long idProducto){
         //ofertaService.ultimas5(idProducto);
         return ResponseEntity.status(HttpStatus.OK)
                 .header("Content-Type", "application/json")
-                .body(toJson(ofertaService.ultimas5(id)));
+                .body(toJson(ofertaService.ultimas5(idProducto)));
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = {"/ultimas5Categoria/{idCategoria}"})
-    public ResponseEntity<String> ultimas5Categoria(@PathVariable Long idCategoria){
+    @RequestMapping(method = RequestMethod.GET, value = {"/ultimas5"})
+    public ResponseEntity<String> ultimas5Categoria(@RequestParam(value = "idCategoria", defaultValue = "0") Long idCategoria){
         //ofertaService.ultimas5(idProducto);
         return ResponseEntity.status(HttpStatus.OK)
                 .header("Content-Type", "application/json")
                 .body(toJson(ofertaService.ultimas5Categoria(idCategoria)));
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = {"/list"})
-    public ResponseEntity<String> ultimasOfertas(@RequestParam(defaultValue = "0") int page,
-                                                 @RequestParam(defaultValue = "5") int size,
+    @RequestMapping(method = RequestMethod.GET, value = {"/list"}, params = {"page", "count"})
+    public ResponseEntity<String> ultimasOfertas(@RequestParam(name ="count", defaultValue = "5") int count,
+                                                 @RequestParam(name = "page", defaultValue = "0") int page,
                                                  @SortDefault(sort = "fechaPublicacion", direction = Sort.Direction.DESC) Sort sort){
-        Pageable pageable = PageRequest.of(page, size, sort);
+        Pageable pageable = PageRequest.of(page, count, sort);
 
         List<OfertaDto> ofertas = ofertaService.ultimasOfertas(pageable);
 
@@ -90,12 +90,6 @@ public class OfertaController {
                 .body(toJson(ofertas));
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = {"/mejores10oferta/{id}"})
-    public ResponseEntity<String> mejores10(@PathVariable Long id){
-        //productoService.obtenerProductoID(id);
-        return ResponseEntity.status(HttpStatus.OK)
-                .header("Content-Type", "application/json")
-                .body(toJson(ofertaService.mejores10(id)));
-    }
+
 
 }
