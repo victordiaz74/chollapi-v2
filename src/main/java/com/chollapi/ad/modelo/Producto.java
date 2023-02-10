@@ -2,6 +2,7 @@ package com.chollapi.ad.modelo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.gson.annotations.Expose;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -28,6 +29,7 @@ public class Producto implements Serializable{
     @Expose
     private String caracteristicas;
 
+    @Nullable
     @Column(name="idFabricante")
     @Expose
     private Long idFabricante;

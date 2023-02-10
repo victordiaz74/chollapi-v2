@@ -26,7 +26,7 @@ public class Oferta implements Serializable{
     private String url;
 
     @Temporal(TemporalType.DATE)
-    @Column(name="fechaPublicacion")
+    @Column(name="fechaHoraPublicacion")
     @Expose
     private Date fechaPublicacion;
 
