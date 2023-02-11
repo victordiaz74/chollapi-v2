@@ -42,6 +42,8 @@ public class Producto implements Serializable{
     @JoinColumn(name = "idCategoria")
     private Categoria categoria;
 
+    public Producto() {}
+
     public Producto(String nombre, String caracteristicas, Long idFabricante) {
         this.nombre = nombre;
         this.caracteristicas = caracteristicas;
