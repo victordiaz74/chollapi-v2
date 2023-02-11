@@ -11,7 +11,7 @@ public interface OfertaService {
 
     Oferta obtenerOfertaID(Long id);
 
-    Oferta crearOferta(Oferta oferta, Long idProducto);
+    Oferta crearOferta(OfertaDto ofertaDto);
 
     Oferta modificarOferta(Oferta oferta);
 

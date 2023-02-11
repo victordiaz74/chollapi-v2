@@ -38,11 +38,11 @@ public class OfertaController {
                 .body(toJson(ofertaService.obtenerOfertaID(id)));
     }
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<String> crearOferta(@RequestBody Oferta oferta, @RequestParam (name = "idProducto") Long idProducto){
+    public ResponseEntity<String> crearOferta(@RequestBody OfertaDto ofertaDto){
         //ofertaService.crearOferta(oferta);
         return ResponseEntity.status(HttpStatus.OK)
                 .header("Content-Type", "application/json")
-                .body(toJson(ofertaService.crearOferta(oferta, idProducto)));
+                .body(toJson(ofertaService.crearOferta(ofertaDto)));
     }
 
     @RequestMapping(method = RequestMethod.PUT)

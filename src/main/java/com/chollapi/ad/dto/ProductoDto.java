@@ -6,7 +6,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 
-@AllArgsConstructor
+@Data
 public class ProductoDto implements Serializable {
 
     @Expose
@@ -20,4 +20,10 @@ public class ProductoDto implements Serializable {
     @Expose
     public Long idCategoria;
 
+    public ProductoDto(Long idProducto, String nombre, String caracteristicas, Long idFabricante) {
+        this.idProducto = idProducto;
+        this.nombre = nombre;
+        this.caracteristicas = caracteristicas;
+        this.idFabricante = idFabricante;
+    }
 }

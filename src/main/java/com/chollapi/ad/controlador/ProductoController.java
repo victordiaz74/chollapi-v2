@@ -36,19 +36,19 @@ public class ProductoController {
                 .body(toJson(productoService.obtenerProductoID(id)));
     }
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<String> crearProducto(@RequestBody Producto producto, Long idCategoria){
+    public ResponseEntity<String> crearProducto(@RequestBody ProductoDto productoDto){
         //productoService.crearProducto(producto);
         return ResponseEntity.status(HttpStatus.OK)
                 .header("Content-Type", "application/json")
-                .body(toJson(productoService.crearProducto(producto, idCategoria)));
+                .body(toJson(productoService.crearProducto(productoDto)));
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity<String> modificarProducto(@RequestBody Producto producto, @RequestParam Long idCategoria){
+    public ResponseEntity<String> modificarProducto(@RequestBody ProductoDto productoDto){
         //productoService.modificarProducto(producto);
         return ResponseEntity.status(HttpStatus.OK)
                 .header("Content-Type", "application/json")
-                .body(toJson(productoService.modificarProducto(producto, idCategoria)));
+                .body(toJson(productoService.modificarProducto(productoDto)));
     }
 
     @RequestMapping(method = RequestMethod.DELETE)

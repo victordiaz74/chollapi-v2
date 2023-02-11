@@ -12,9 +12,9 @@ public interface ProductoService{
 
     Producto obtenerProductoID(Long id);
 
-    Producto crearProducto(Producto producto, Long idCategoria);
+    Producto crearProducto(ProductoDto productoDto);
 
-    Producto modificarProducto(Producto producto, Long idCategoria);
+    Producto modificarProducto(ProductoDto productoDto);
 
     Boolean eliminarProducto(Long id);
 

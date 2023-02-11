@@ -35,17 +35,19 @@ public class OfertaServiceImpl implements OfertaService {
     }
 
     @Override
-    public Oferta crearOferta(Oferta oferta, Long idProducto) {
-        Producto producto = productoRepository.findById(idProducto).get();
-        if(existeOferta(oferta)){
+    public Oferta crearOferta(OfertaDto ofertaDto) {
+        Producto producto = productoRepository.findById(ofertaDto.idProducto).get();
+        if(existeOferta(ofertaDto)){
             return null;
-        }else{
-            oferta.addProducto(producto);
         }
+
+        Oferta oferta = new Oferta(ofertaDto.getUrl(), ofertaDto.getFechaPublicacion(), ofertaDto.getPrecio(), ofertaDto.getDisponible());
+        oferta.addProducto(producto);
+
         return ofertaRepository.save(oferta);
     }
 
-    private boolean existeOferta(Oferta oferta) {
+    private boolean existeOferta(OfertaDto ofertaDto) {
 
         for(Oferta of: ofertaRepository.findAll()) {
             Date fechaOferta = of.getFechaPublicacion();
@@ -53,10 +55,10 @@ public class OfertaServiceImpl implements OfertaService {
             Float precio = of.getPrecio();
             Boolean disponible = of.getDisponible();
 
-            if(fechaOferta.equals(oferta.getFechaPublicacion())) {
-                if(url.equals(oferta.getUrl())) {
-                    if(precio.equals(oferta.getPrecio())){
-                        if(disponible.equals(oferta.getDisponible())) {
+            if(fechaOferta.equals(ofertaDto.getFechaPublicacion())) {
+                if(url.equals(ofertaDto.getUrl())) {
+                    if(precio.equals(ofertaDto.getPrecio())){
+                        if(disponible.equals(ofertaDto.getDisponible())) {
                             return true;
                         }
                     }
@@ -90,7 +92,7 @@ public class OfertaServiceImpl implements OfertaService {
         List<OfertaDto> ofertasDtos = new ArrayList<>();
 
         for (Oferta o: ofertas){
-            ofertasDtos.add(new OfertaDto(o.getIdOferta(), o.getUrl(), o.getFechaPublicacion(), o.getDisponible()));
+            ofertasDtos.add(new OfertaDto(o.getIdOferta(), o.getUrl(), o.getFechaPublicacion(), o.getPrecio(), o.getDisponible()));
         }
 
         return ofertasDtos;

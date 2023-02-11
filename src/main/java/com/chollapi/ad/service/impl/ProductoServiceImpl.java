@@ -31,16 +31,19 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     @Override
-    public Producto crearProducto(Producto producto, Long idCategoria) {
-        Categoria categoria = categoriaRepository.findById(idCategoria).get();
+    public Producto crearProducto(ProductoDto productoDto) {
+        Categoria categoria = categoriaRepository.findById(productoDto.getIdCategoria()).get();
+        Producto producto = new Producto(productoDto.getNombre(), productoDto.getCaracteristicas(), productoDto.getIdFabricante());
+        producto.setCategoria(categoria);
         categoria.addProducto(producto);
         return productoRepository.save(producto);
     }
 
     @Override
-    public Producto modificarProducto(Producto producto, Long idCategoria) {
+    public Producto modificarProducto(ProductoDto productoDto) {
 
-        Categoria categoria = categoriaRepository.findById(idCategoria).get();
+        Categoria categoria = categoriaRepository.findById(productoDto.getIdCategoria()).get();
+        Producto producto = new Producto(productoDto.getNombre(), productoDto.getCaracteristicas(), productoDto.getIdFabricante());
         producto.setCategoria(categoria);
         return productoRepository.save(producto);
     }
@@ -70,7 +73,7 @@ public class ProductoServiceImpl implements ProductoService {
         List<ProductoDto> productoDtos = new ArrayList<>();
 
         for(Producto pro: productos) {
-            productoDtos.add(new ProductoDto(pro.getIdProducto(), pro.getNombre(), pro.getCaracteristicas(), pro.getIdFabricante(), pro.getCategoria().getIdCategoria()));
+            productoDtos.add(new ProductoDto(pro.getIdProducto(), pro.getNombre(), pro.getCaracteristicas(), pro.getIdFabricante()));
         }
 
         return productoDtos;

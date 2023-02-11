@@ -46,6 +46,15 @@ public class Oferta implements Serializable{
     )
     private List<Producto> productos = new ArrayList<>();
 
+    public Oferta(){}
+
+    public Oferta(String url, Date fechaPublicacion, Float precio, Boolean disponible) {
+        this.url = url;
+        this.fechaPublicacion = fechaPublicacion;
+        this.precio = precio;
+        this.disponible = disponible;
+    }
+
     public void addProducto(Producto p) {
         productos.add( p );
         p.getOfertas().add( this );
