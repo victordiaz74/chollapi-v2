@@ -71,7 +71,7 @@ public class ProductoController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = {"/mejores10oferta"})
-    public ResponseEntity<String> mejores10(@RequestParam(value = "id", defaultValue = "0") Long id){
+    public ResponseEntity<String> mejores10(@RequestParam(value = "idProducto", defaultValue = "0") Long id){
         //productoService.obtenerProductoID(id);
         return ResponseEntity.status(HttpStatus.OK)
                 .header("Content-Type", "application/json")

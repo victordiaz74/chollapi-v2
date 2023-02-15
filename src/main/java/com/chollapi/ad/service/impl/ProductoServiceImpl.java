@@ -62,8 +62,8 @@ public class ProductoServiceImpl implements ProductoService {
 
     @Override
     public List<Oferta> mejores10(Long idProducto){
-
-        return productoRepository.mejores10(idProducto);
+        List<Oferta> ofertas = productoRepository.mejores10(idProducto);
+        return ofertas;
     }
 
     @Override

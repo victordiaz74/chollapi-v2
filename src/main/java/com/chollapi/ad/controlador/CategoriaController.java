@@ -56,7 +56,7 @@ public class CategoriaController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = {"/ultimos5productos"})
-    public ResponseEntity<String> ultimos5(@RequestParam(value = "id", defaultValue = "0") Long idCategoria){
+    public ResponseEntity<String> ultimos5(@RequestParam(value = "idCategoria", defaultValue = "0") Long idCategoria){
         return ResponseEntity.status(HttpStatus.OK)
                 .header("Content-Type", "application/json")
                 .body(toJson(categoriaService.ultimos5(idCategoria)));
