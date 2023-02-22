@@ -4,6 +4,7 @@ import com.chollapi.ad.dto.OfertaDto;
 import com.chollapi.ad.modelo.Oferta;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +25,9 @@ public class OfertaController {
     @Autowired
     private OfertaService ofertaService;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     public String toJson(Object object) {
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 
@@ -31,10 +35,10 @@ public class OfertaController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<String> obtenerOfertaID(@RequestParam(value = "idOferta", defaultValue = "0") Long id){
+    public ResponseEntity<OfertaDto> obtenerOfertaID(@RequestParam(value = "idOferta", defaultValue = "0") Long id){
         return ResponseEntity.status(HttpStatus.OK)
                 .header("Content-Type", "application/json")
-                .body(toJson(ofertaService.obtenerOfertaID(id)));
+                .body(modelMapper.map(ofertaService.obtenerOfertaID(id),OfertaDto.class));
     }
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<String> crearOferta(@RequestBody OfertaDto ofertaDto){

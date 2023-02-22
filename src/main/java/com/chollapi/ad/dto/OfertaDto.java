@@ -22,6 +22,9 @@ public class OfertaDto implements Serializable {
     @Expose
     public Long idProducto;
 
+    public OfertaDto() {
+        // constructor vacío
+    }
     public OfertaDto(Long idOferta, String url, Date fechaPublicacion, Float precio, Boolean disponible) {
         this.idOferta = idOferta;
         this.url = url;
