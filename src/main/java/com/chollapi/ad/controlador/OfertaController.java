@@ -32,14 +32,12 @@ public class OfertaController {
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<String> obtenerOfertaID(@RequestParam(value = "idOferta", defaultValue = "0") Long id){
-        //ofertaService.obtenerOfertaID(id);
         return ResponseEntity.status(HttpStatus.OK)
                 .header("Content-Type", "application/json")
                 .body(toJson(ofertaService.obtenerOfertaID(id)));
     }
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<String> crearOferta(@RequestBody OfertaDto ofertaDto){
-        //ofertaService.crearOferta(oferta);
         return ResponseEntity.status(HttpStatus.OK)
                 .header("Content-Type", "application/json")
                 .body(toJson(ofertaService.crearOferta(ofertaDto)));
@@ -47,7 +45,6 @@ public class OfertaController {
 
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<String> modificarOferta(@RequestBody Oferta oferta){
-        //ofertaService.modificarOferta(oferta);
         return ResponseEntity.status(HttpStatus.OK)
                 .header("Content-Type", "application/json")
                 .body(toJson(ofertaService.modificarOferta(oferta)));
@@ -55,7 +52,6 @@ public class OfertaController {
 
     @RequestMapping(method = RequestMethod.DELETE)
     public ResponseEntity<Boolean> eliminarOferta(@RequestParam(value = "idOferta", defaultValue = "0") Long id){
-        //ofertaService.eliminarOferta(id);
         return ResponseEntity.status(HttpStatus.OK)
                 .header("Content-Type", "application/json")
                 .body(ofertaService.eliminarOferta(id));
@@ -63,7 +59,6 @@ public class OfertaController {
 
     @RequestMapping(method = RequestMethod.GET, value = {"/ultimas5ofertas"})
     public ResponseEntity<String> ultimas5(@RequestParam(value = "idProducto", defaultValue = "0") Long idProducto){
-        //ofertaService.ultimas5(idProducto);
         return ResponseEntity.status(HttpStatus.OK)
                 .header("Content-Type", "application/json")
                 .body(toJson(ofertaService.ultimas5(idProducto)));
@@ -71,7 +66,6 @@ public class OfertaController {
 
     @RequestMapping(method = RequestMethod.GET, value = {"/ultimas5"})
     public ResponseEntity<String> ultimas5Categoria(@RequestParam(value = "idCategoria", defaultValue = "0") Long idCategoria){
-        //ofertaService.ultimas5(idProducto);
         return ResponseEntity.status(HttpStatus.OK)
                 .header("Content-Type", "application/json")
                 .body(toJson(ofertaService.ultimas5Categoria(idCategoria)));
